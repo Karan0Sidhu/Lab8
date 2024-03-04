@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         cityDataList.add(new City("Waterloo","ON"));
 
 
-        cityAdapter = new CustomList(this,cityDataList);
+        cityAdapter = new CityList(this,cityDataList);
         cityList.setAdapter(cityAdapter);
 
     }
