@@ -108,4 +108,4 @@ public class CityList extends ArrayAdapter<City> {
 
 }
 
-}
+

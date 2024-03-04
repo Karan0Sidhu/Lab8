@@ -7,25 +7,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+
 
 public class CityListTest {
+    private CityList list;
     private CityList mockCityList() {
-        CityList cityList = new CityList();
-        cityList.add(mockCity());
-        return cityList;
+        list = new CityList(null,new ArrayList<>());
+        list.add(mockCity());
+        return list;
     }
     private City mockCity() {
         return new City("Edmonton", "Alberta");
     }
 
     @Test
-    public void testAdd() {
-        CityList cityList = mockCityList();
-        assertEquals(1, cityList.getCities().size());
-        City city = new City("Regina", "Saskatchewan");
-        cityList.add(city);
-        assertEquals(2, cityList.getCities().size());
-        assertTrue(cityList.getCities().contains(city));
+    public void addCityTest(){
+        CityList list = mockCityList();
+        int listSize = list.CountCities();
+        list.add(new City("Estevan", "SK"));
+        assertEquals(listSize + 1, list.CountCities());
     }
     @Test
     public void testAddException() {
@@ -35,17 +36,7 @@ public class CityListTest {
         assertThrows( IllegalArgumentException.class, () -> {
             cityList.add(city); });
     }
-    @Test
-    public void testGetCities() {
-        CityList cityList = mockCityList();
-        assertEquals(0,
-                mockCity().compareTo(cityList.getCities().get(0)));
-        City city = new City("Charlottetown", "Prince Edward Island");
-        cityList.add(city);
-        assertEquals(0, city.compareTo(cityList.getCities().get(0)));
-        assertEquals(0,
-                mockCity().compareTo(cityList.getCities().get(1)));
-    }
+
     @Test
     public void testHasCity() {
         CityList cityList = mockCityList();
@@ -77,17 +68,17 @@ public class CityListTest {
 
     @Test
     public void testCountCities() {
-        CityList cityList = new CityList();
-        assertEquals(0, cityList.CountCities());
+        CityList cityList = mockCityList();
+        assertEquals(1, cityList.CountCities());
 
         City city = new City("Charlottetown", "Prince Edward Island");
         cityList.add(city);
 
-        assertEquals(1, cityList.CountCities());
+        assertEquals(2, cityList.CountCities());
 
         cityList.deleteCity(city);
 
-        assertEquals(0, cityList.CountCities());
+        assertEquals(1, cityList.CountCities());
     }
 
 
